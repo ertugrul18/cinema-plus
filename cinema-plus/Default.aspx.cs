@@ -12,7 +12,7 @@ namespace cinema_plus
         protected void Page_Load(object sender, EventArgs e)
         {
             CinemaTicketEntities entities = new CinemaTicketEntities();
-            var  data =  entities.filmlers.ToList();
+            var data = entities.filmlers.ToList();
 
         }
     }

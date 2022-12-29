@@ -13,23 +13,21 @@ namespace cinema_plus
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CinemaTicketEntities : DbContext
+    public partial class CinemaTicketEntities1 : DbContext
     {
-        public CinemaTicketEntities()
-            : base("name=CinemaTicketEntities")
+        public CinemaTicketEntities1()
+            : base("name=CinemaTicketEntities1")
         {
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-           
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<filmler> filmlers { get; set; }
-        public virtual DbSet<rezervasyon> rezervasyons { get; set; }
-        public virtual DbSet<seanslar> seanslars { get; set; }
-        public virtual DbSet<musteriler> musterilers { get; set; }
+        public virtual DbSet<filmlers> filmlers { get; set; }
+        public virtual DbSet<musterilers> musterilers { get; set; }
+        public virtual DbSet<rezervasyons> rezervasyons { get; set; }
+        public virtual DbSet<seanslars> seanslars { get; set; }
     }
 }

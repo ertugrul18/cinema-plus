@@ -4,75 +4,75 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CinemaTicketModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="filmler">
-          <Key>
-            <PropertyRef Name="film_id" />
-          </Key>
-          <Property Name="film_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="film_adi" Type="nvarchar" MaxLength="50" />
-          <Property Name="süresi" Type="nvarchar" MaxLength="50" />
-          <Property Name="vizyon_tarihi" Type="date" />
-          <Property Name="tur_adi" Type="nvarchar" MaxLength="50" />
-          <Property Name="ozet" Type="nvarchar(max)" />
-          <Property Name="imdb_puani" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="yapimi" Type="nvarchar" MaxLength="50" />
-          <Property Name="yonetmen" Type="nvarchar" MaxLength="50" />
-          <Property Name="dil" Type="nvarchar" MaxLength="10" />
-          <Property Name="Image" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="musteriler">
-          <Key>
-            <PropertyRef Name="musteri_id" />
-          </Key>
-          <Property Name="musteri_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="musteri_adi" Type="nvarchar" MaxLength="50" />
-          <Property Name="musteri_soyadi" Type="nvarchar" MaxLength="50" />
-          <Property Name="tel_no" Type="nvarchar" MaxLength="20" />
-          <Property Name="eposta" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="rezervasyon">
-          <Key>
-            <PropertyRef Name="rez_id" />
-          </Key>
-          <Property Name="rez_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="film_id" Type="int" />
-          <Property Name="koltuk_no" Type="int" />
-          <Property Name="seans_id" Type="int" />
-          <Property Name="musteri_id" Type="int" />
-        </EntityType>
-        <EntityType Name="seanslar">
-          <Key>
-            <PropertyRef Name="seans_id" />
-          </Key>
-          <Property Name="seans_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="film_id" Type="int" />
-          <Property Name="tarih" Type="datetime" />
-          <Property Name="saat" Type="time" Precision="7" />
-        </EntityType>
-        <Association Name="FK_rezervasyon_filmler">
-          <End Role="filmler" Type="Self.filmler" Multiplicity="0..1" />
-          <End Role="rezervasyon" Type="Self.rezervasyon" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="filmler">
-              <PropertyRef Name="film_id" />
-            </Principal>
-            <Dependent Role="rezervasyon">
-              <PropertyRef Name="film_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="CinemaTicketModelStoreContainer">
-          <EntitySet Name="filmler" EntityType="Self.filmler" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="musteriler" EntityType="Self.musteriler" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="rezervasyon" EntityType="Self.rezervasyon" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="seanslar" EntityType="Self.seanslar" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_rezervasyon_filmler" Association="Self.FK_rezervasyon_filmler">
-            <End Role="filmler" EntitySet="filmler" />
-            <End Role="rezervasyon" EntitySet="rezervasyon" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="CinemaTicketModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CinemaTicketModelStoreContainer">
+    <EntitySet Name="filmlers" EntityType="CinemaTicketModel.Store.filmlers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="rezervasyons" EntityType="CinemaTicketModel.Store.rezervasyons" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="seanslars" EntityType="CinemaTicketModel.Store.seanslars" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="musterilers" EntityType="CinemaTicketModel.Store.musterilers" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_rezervasyon_filmler" Association="CinemaTicketModel.Store.FK_rezervasyon_filmler">
+      <End Role="filmler" EntitySet="filmlers" />
+      <End Role="rezervasyon" EntitySet="rezervasyons" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="filmlers">
+    <Key>
+      <PropertyRef Name="film_id" />
+    </Key>
+    <Property Name="film_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="film_adi" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="süresi" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="vizyon_tarihi" Type="datetime" Nullable="true" />
+    <Property Name="tur_adi" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="ozet" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="imdb_puani" Type="decimal" Nullable="true" Precision="18" Scale="0" />
+    <Property Name="yapimi" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="yonetmen" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="dil" Type="nvarchar" Nullable="true" MaxLength="10" />
+    <Property Name="Image" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="rezervasyons">
+    <Key>
+      <PropertyRef Name="rez_id" />
+    </Key>
+    <Property Name="rez_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="musteri_id" Type="int" Nullable="true" />
+    <Property Name="film_id" Type="int" Nullable="true" />
+    <Property Name="koltuk_no" Type="int" Nullable="true" />
+    <Property Name="seans_id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="seanslars">
+    <Key>
+      <PropertyRef Name="seans_id" />
+    </Key>
+    <Property Name="seans_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="film_id" Type="int" Nullable="true" />
+    <Property Name="tarih" Type="datetime" Nullable="true" />
+    <Property Name="saat" Type="time" Nullable="true" Precision="7" />
+  </EntityType>
+  <EntityType Name="musterilers">
+    <Key>
+      <PropertyRef Name="musteri_id" />
+    </Key>
+    <Property Name="musteri_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="musteri_adi" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="musteri_soyadi" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="tel_no" Type="nvarchar" Nullable="true" MaxLength="20" />
+    <Property Name="eposta" Type="nvarchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_rezervasyon_filmler">
+    <End Role="filmler" Type="CinemaTicketModel.Store.filmlers" Multiplicity="0..1" />
+    <End Role="rezervasyon" Type="CinemaTicketModel.Store.rezervasyons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="filmler">
+        <PropertyRef Name="film_id" />
+      </Principal>
+      <Dependent Role="rezervasyon">
+        <PropertyRef Name="film_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CinemaTicketModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -149,60 +149,59 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CinemaTicketModelStoreContainer" CdmEntityContainer="CinemaTicketEntities">
-          <EntitySetMapping Name="filmlers">
-            <EntityTypeMapping TypeName="CinemaTicketModel.filmler">
-              <MappingFragment StoreEntitySet="filmler">
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="film_id" ColumnName="film_id" />
-                <ScalarProperty Name="film_adi" ColumnName="film_adi" />
-                <ScalarProperty Name="süresi" ColumnName="süresi" />
-                <ScalarProperty Name="vizyon_tarihi" ColumnName="vizyon_tarihi" />
-                <ScalarProperty Name="tur_adi" ColumnName="tur_adi" />
-                <ScalarProperty Name="ozet" ColumnName="ozet" />
-                <ScalarProperty Name="imdb_puani" ColumnName="imdb_puani" />
-                <ScalarProperty Name="yapimi" ColumnName="yapimi" />
-                <ScalarProperty Name="yonetmen" ColumnName="yonetmen" />
-                <ScalarProperty Name="dil" ColumnName="dil" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="rezervasyons">
-            <EntityTypeMapping TypeName="CinemaTicketModel.rezervasyon">
-              <MappingFragment StoreEntitySet="rezervasyon">
-                <ScalarProperty Name="rez_id" ColumnName="rez_id" />
-                <ScalarProperty Name="musteri_id" ColumnName="musteri_id" />
-                <ScalarProperty Name="film_id" ColumnName="film_id" />
-                <ScalarProperty Name="koltuk_no" ColumnName="koltuk_no" />
-                <ScalarProperty Name="seans_id" ColumnName="seans_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="seanslars">
-            <EntityTypeMapping TypeName="CinemaTicketModel.seanslar">
-              <MappingFragment StoreEntitySet="seanslar">
-                <ScalarProperty Name="seans_id" ColumnName="seans_id" />
-                <ScalarProperty Name="film_id" ColumnName="film_id" />
-                <ScalarProperty Name="tarih" ColumnName="tarih" />
-                <ScalarProperty Name="saat" ColumnName="saat" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="musterilers">
-            <EntityTypeMapping TypeName="CinemaTicketModel.musteriler">
-              <MappingFragment StoreEntitySet="musteriler">
-                <ScalarProperty Name="eposta" ColumnName="eposta" />
-                <ScalarProperty Name="tel_no" ColumnName="tel_no" />
-                <ScalarProperty Name="musteri_soyadi" ColumnName="musteri_soyadi" />
-                <ScalarProperty Name="musteri_adi" ColumnName="musteri_adi" />
-                <ScalarProperty Name="musteri_id" ColumnName="musteri_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CinemaTicketModelStoreContainer" CdmEntityContainer="CinemaTicketEntities">
+    <EntitySetMapping Name="filmlers">
+      <EntityTypeMapping TypeName="IsTypeOf(CinemaTicketModel.filmler)">
+        <MappingFragment StoreEntitySet="filmlers">
+          <ScalarProperty Name="film_id" ColumnName="film_id" />
+          <ScalarProperty Name="film_adi" ColumnName="film_adi" />
+          <ScalarProperty Name="süresi" ColumnName="süresi" />
+          <ScalarProperty Name="vizyon_tarihi" ColumnName="vizyon_tarihi" />
+          <ScalarProperty Name="tur_adi" ColumnName="tur_adi" />
+          <ScalarProperty Name="ozet" ColumnName="ozet" />
+          <ScalarProperty Name="imdb_puani" ColumnName="imdb_puani" />
+          <ScalarProperty Name="yapimi" ColumnName="yapimi" />
+          <ScalarProperty Name="yonetmen" ColumnName="yonetmen" />
+          <ScalarProperty Name="dil" ColumnName="dil" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rezervasyons">
+      <EntityTypeMapping TypeName="IsTypeOf(CinemaTicketModel.rezervasyon)">
+        <MappingFragment StoreEntitySet="rezervasyons">
+          <ScalarProperty Name="rez_id" ColumnName="rez_id" />
+          <ScalarProperty Name="musteri_id" ColumnName="musteri_id" />
+          <ScalarProperty Name="film_id" ColumnName="film_id" />
+          <ScalarProperty Name="koltuk_no" ColumnName="koltuk_no" />
+          <ScalarProperty Name="seans_id" ColumnName="seans_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seanslars">
+      <EntityTypeMapping TypeName="IsTypeOf(CinemaTicketModel.seanslar)">
+        <MappingFragment StoreEntitySet="seanslars">
+          <ScalarProperty Name="seans_id" ColumnName="seans_id" />
+          <ScalarProperty Name="film_id" ColumnName="film_id" />
+          <ScalarProperty Name="tarih" ColumnName="tarih" />
+          <ScalarProperty Name="saat" ColumnName="saat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="musterilers">
+      <EntityTypeMapping TypeName="IsTypeOf(CinemaTicketModel.musteriler)">
+        <MappingFragment StoreEntitySet="musterilers">
+          <ScalarProperty Name="musteri_id" ColumnName="musteri_id" />
+          <ScalarProperty Name="musteri_adi" ColumnName="musteri_adi" />
+          <ScalarProperty Name="musteri_soyadi" ColumnName="musteri_soyadi" />
+          <ScalarProperty Name="tel_no" ColumnName="tel_no" />
+          <ScalarProperty Name="eposta" ColumnName="eposta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -216,7 +215,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
