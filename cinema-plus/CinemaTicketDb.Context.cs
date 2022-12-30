@@ -28,6 +28,7 @@ namespace cinema_plus
         }
     
         public virtual DbSet<filmler> filmlers { get; set; }
+        //public virtual DbSet<filmler> filmlers { get; set; }
         public virtual DbSet<rezervasyon> rezervasyons { get; set; }
         public virtual DbSet<seanslar> seanslars { get; set; }
         public virtual DbSet<musteriler> musterilers { get; set; }
